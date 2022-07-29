@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author horaoen
  */
 @SpringBootApplication
-@MapperScan(basePackages = {"com.horaoen.smart_safe_campus.dao"})
 public class SmartSafeCampusApplication {
     public static void main(String[] args) {
         SpringApplication.run(SmartSafeCampusApplication.class, args);

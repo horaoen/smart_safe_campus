@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.horaoen.smart_safe_campus.dao.RoleDao">
+    <resultMap id="roleDetailWithPermissions" type="RoleDetailVoWithPermissionsVo">
+        <id property="id" column="id" />
+        <collection property="permissions"
+                    ofType="java.util.List"
+                    select="com.horaoen.smart_safe_campus.dao.PermissionDao.getPermissionsByRoleId"
+                    column="id"/>
+    </resultMap>
+
+    <select id="getAll" resultType="RoleDetailVo">
+        SELECT
+            id, description, role_name
+        FROM
+            tbl_role
+    </select>
+
+    <select id="getRoleDetailWithPermissionsByRoleId" resultMap="roleDetailWithPermissions">
+        SELECT
+            id, description, role_name
+        FROM
+            tbl_role
+        WHERE
+            id = #{roleId}
+    </select>
+
+    <delete id="deleteRoleDetailByRoleId">
+        DELETE FROM tbl_role WHERE id = #{roleId}
+    </delete>
+
+    <insert id="addRoleDetail" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO
+            tbl_role(description, role_name)
+        VALUES (#{description}, #{roleName})
+    </insert>
+
+    <update id="updateRoleDetail">
+        UPDATE
+            tbl_role
+        SET
+            description = #{roleForCreateDto.description},
+            role_name = #{roleForCreateDto.roleName}
+    </update>
+
+</mapper>
+

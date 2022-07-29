@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.horaoen.smart_safe_campus.dao.UserDao">
+
+    <select id="findUserByUsername" resultType="com.horaoen.smart_safe_campus.mbg.model.User">
+        SELECT
+            id, username, password, role_id
+        FROM
+            tbl_user
+        WHERE
+            username = #{username}
+    </select>
+    <select id="getRoleByUserId" resultType="com.horaoen.smart_safe_campus.mbg.model.Role">
+        SELECT
+            id, description, role_name
+        FROM
+            tbl_role
+        WHERE
+            id = (SELECT role_id FROM tbl_user WHERE id = #{userId})
+    </select>
+</mapper>
+

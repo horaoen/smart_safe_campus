@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.horaoen.smart_safe_campus.dao.OrganizationDao">
+    <resultMap id="organization" type="OrganizationVo">
+        <collection property="subOrgans"
+                    ofType="SimpleOrganVo"
+                    select="getOrgansByParentId"
+                    column="organ_id" />
+    </resultMap>
+    <insert id="addOrganization">
+        INSERT INTO
+            tbl_organization(organ_name, parent_id, organ_id, organ_type, order_field)
+        VALUES (#{organName}, #{parentId}, #{id}, #{organType}, #{orderField})
+    </insert>
+    <update id="updateOrganization">
+        UPDATE
+            tbl_organization
+        SET
+            organ_name = #{organName},
+            parent_id = #{parentId},
+            order_field = #{orderField}
+        WHERE organ_id = #{id}
+    </update>
+
+    <delete id="deleteByIds">
+        DELETE FROM
+            tbl_organization
+        WHERE
+            organ_id in
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getAllRegion" resultType="SimpleOrganVo">
+        SELECT
+            organ_id, organ_name
+        FROM
+            tbl_organization
+        WHERE
+            organ_type = 0
+        ORDER BY
+            order_field
+    </select>
+
+    <select id="getOrganById" resultMap="organization">
+        SELECT
+            organ_id,
+            organ_name,
+            organ_type,
+            order_field,
+        FROM
+            tbl_organization
+        WHERE
+            organ_id = #{organId}
+    </select>
+
+    <select id="getOrgansByParentId" resultType="SimpleOrganVo">
+        SELECT
+            organ_id, organ_name
+        FROM
+            tbl_organization
+        WHERE
+            parent_id = #{parentId}
+    </select>
+</mapper>
+

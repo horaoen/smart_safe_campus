@@ -1,6 +1,9 @@
 spring:
   profiles:
     active: dev
+  devtools:
+    restart:
+      enabled: true
 
 logging:
   level:
@@ -10,8 +13,13 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath:mapper/*Mapper.xml
+  mapper-locations: classpath:mapper/*Dao.xml
   type-aliases-package: com.horaoen.smart_safe_campus.model
 
 springdoc:
-  packages-to-scan: com.horaoen.smart_safe_campus.api.v1
+  packages-to-scan: com.horaoen.smart_safe_campus.controller
+
+security:
+  jwt:
+    secret: "!Q464rwr(&*)6%$#^%&JNJ46da"
+

@@ -7,3 +7,19 @@ spring:
     url: jdbc:postgresql://localhost:5432/smart_safe_campus
     username: postgres
     password: 123456
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3000
+    lettuce:
+      pool:
+        min-idle: 1
+        max-idle: 6
+        max-active: 10
+        max-wait: 1000
+      shutdown-timeout: 200
+    key:
+      prefix:
+        authCode: "portal:authCode:"
+      expire:
+        authCode: 120
