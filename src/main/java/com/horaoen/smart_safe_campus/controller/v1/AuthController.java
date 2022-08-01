@@ -25,11 +25,11 @@ public class AuthController {
         return authService.login(loginUser);
     }
 
-    @GetMapping("/getAuthCode")
-    @Operation(description = "获取验证码")
-    public CommonResult getAuthCode(@RequestParam String telephone) {
-        return authService.generateAuthCode(telephone);
-    }
+//    @GetMapping("/getAuthCode")
+//    @Operation(description = "获取验证码")
+//    public CommonResult getAuthCode(@RequestParam String telephone) {
+//        return authService.generateAuthCode(telephone);
+//    }
 
     @Operation(description = "判断验证码是否正确")
     @PostMapping(value = "/verifyAuthCode")
