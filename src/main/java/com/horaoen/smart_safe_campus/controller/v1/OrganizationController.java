@@ -7,7 +7,9 @@ import com.horaoen.smart_safe_campus.service.OrganizationService;
 import com.horaoen.smart_safe_campus.util.StringUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,8 +23,10 @@ public class OrganizationController {
     private OrganizationService organizationService;
 
     @GetMapping
+    @RequiresAuthentication
     @Operation(description = "获取组织架构地区")
     public List<SimpleOrganVo> getAllRegion() {
+        System.out.println("test");
         return organizationService.getAllRegion();
     }
 

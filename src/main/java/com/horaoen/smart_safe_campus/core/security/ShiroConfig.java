@@ -1,37 +1,37 @@
 package com.horaoen.smart_safe_campus.core.security;
 
-import com.horaoen.smart_safe_campus.core.security.JwtRealm;
-import com.horaoen.smart_safe_campus.core.security.SessionRealm;
+import com.horaoen.smart_safe_campus.core.security.filter.JwtFilter;
 import org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy;
 import org.apache.shiro.authc.pam.ModularRealmAuthenticator;
 import org.apache.shiro.cache.AbstractCacheManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.RememberMeManager;
 import org.apache.shiro.realm.Realm;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
-    @Bean
-    public Realm myRealm() {
-        return new SessionRealm();
-    }
 
     @Bean
-    public DefaultWebSecurityManager mySecurityManager(Realm myRealm, ModularRealmAuthenticator modularRealmAuthenticator) {
+    public DefaultWebSecurityManager SecurityManager(JwtRealm jwtRealm, ModularRealmAuthenticator modularRealmAuthenticator) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
 
         securityManager.setAuthenticator(modularRealmAuthenticator);
-        securityManager.setRealm(myRealm);
-        //securityManager.setRealm(new JwtRealm());
+        //securityManager.setRealm(myRealm);
+        securityManager.setRealm(jwtRealm);
 
         securityManager.setRememberMeManager(getCookieRememberMeManager());
         AbstractCacheManager cacheManager = new MemoryConstrainedCacheManager();
@@ -41,14 +41,22 @@ public class ShiroConfig {
     }
 
     @Bean
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager mySecurityManager) {
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean factoryBean = new ShiroFilterFactoryBean();
-        factoryBean.setSecurityManager(mySecurityManager);
-
-        Map<String, String> filterMap = new HashMap<>();
-        filterMap.put("/auth/login", "anon");
-        filterMap.put("/v1/role/**", "authc");
-        factoryBean.setFilterChainDefinitionMap(filterMap);
+        // 添加自己的过滤器并且取名为jwt
+        Map<String, Filter> filterMap = new LinkedHashMap<>();
+        //设置我们自定义的JWT过滤器
+        filterMap.put("jwt", new JwtFilter());
+        factoryBean.setFilters(filterMap);
+        factoryBean.setSecurityManager(securityManager);
+        // 设置无权限时跳转的 url;
+        factoryBean.setUnauthorizedUrl("/auth/403");
+        Map<String, String> filterRuleMap = new HashMap<>();
+        // 所有请求通过我们自己的JWT Filter
+        //filterRuleMap.put("/**", "jwt");
+        // 访问 /unauthorized/** 不通过JWTFilter
+        filterRuleMap.put("/v1/auth/**", "anon");
+        factoryBean.setFilterChainDefinitionMap(filterRuleMap);
         return factoryBean;
     }
 
@@ -66,6 +74,25 @@ public class ShiroConfig {
         simpleCookie.setMaxAge(2592000);
         rememberMeManager.setCookie(simpleCookie);
         return rememberMeManager;
+    }
+
+    @Bean
+    public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        defaultAdvisorAutoProxyCreator.setProxyTargetClass(true);
+        return defaultAdvisorAutoProxyCreator;
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
+        advisor.setSecurityManager(securityManager);
+        return advisor;
+    }
+
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
     }
 
 }

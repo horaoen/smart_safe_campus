@@ -1,5 +1,7 @@
 package com.horaoen.smart_safe_campus.controller.v1;
 
+import com.horaoen.smart_safe_campus.common.api.CommonResult;
+import com.horaoen.smart_safe_campus.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Tag(name = "UserController", description = "用户管理")
 public class UserController {
     @Autowired
+    private UserService userService;
+    @Autowired
     private StringRedisTemplate stringRedisTemplate;
 
     @GetMapping
     @Operation(description = "获得全部用户信息")
-    public String getAllUsers() {
-        ValueOperations<String, String> operations = this.stringRedisTemplate.opsForValue();
-        return operations.get("a");
+    public CommonResult getAllUsers() {
+        return CommonResult.success(userService.getAllUsers());
     }
 }

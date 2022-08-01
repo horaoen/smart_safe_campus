@@ -1,7 +1,6 @@
 package com.horaoen.smart_safe_campus.service.impl;
 
 import com.horaoen.smart_safe_campus.dao.OrganizationDao;
-import com.horaoen.smart_safe_campus.mbg.mapper.OrganizationMapper;
 import com.horaoen.smart_safe_campus.model.vo.OrganizationVo;
 import com.horaoen.smart_safe_campus.model.dto.OrganizationForCreateDto;
 import com.horaoen.smart_safe_campus.model.OrganizationType;
@@ -26,7 +25,7 @@ public class OrganizationServiceImpl implements OrganizationService {
             List<SimpleOrganVo> subOrgans = organizationDao.getOrgansByParentId(id);
             for (SimpleOrganVo subOrgan: subOrgans) {
                 if(subOrgan.getOrganType() != OrganizationType.CLASS) {
-                    UUID subId = subOrgan.getId();
+                    UUID subId = subOrgan.getOrganId();
                     deepDeleteOrgans(new ArrayList<UUID>(Collections.singleton(subId)));
                 }
             }

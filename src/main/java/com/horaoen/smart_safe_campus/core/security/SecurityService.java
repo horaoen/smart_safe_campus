@@ -42,8 +42,9 @@ public class SecurityService {
     }
 
     public AuthenticationInfo getJWTAuthenticationInfo(AuthenticationToken authenticationToken, String realmName) {
-        JWTToken userToken = (JWTToken) authenticationToken;
-        String username = userToken.getPrincipal().toString();
-        return getAuthenticationInfo(realmName, username);
+//        JWTToken userToken = (JWTToken) authenticationToken;
+//        String username = userToken.getPrincipal().toString();
+//        return getAuthenticationInfo(realmName, username);
+        return null;
     }
 }

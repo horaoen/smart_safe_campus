@@ -1,6 +1,6 @@
 package com.horaoen.smart_safe_campus.core.security.filter;
 
-import com.horaoen.smart_safe_campus.core.security.JWTToken;
+import com.horaoen.smart_safe_campus.core.security.JwtToken;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-public class JWTFilter extends BasicHttpAuthenticationFilter {
+public class JwtFilter extends BasicHttpAuthenticationFilter {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     /**
      * 如果带有 token，则对 token 进行检查，否则直接通过
@@ -23,6 +23,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws UnauthorizedException {
         //判断请求的请求头是否带上 "Token"
+        Boolean res = isLoginAttempt(request, response);
         if (isLoginAttempt(request, response)) {
             //如果存在，则进入 executeLogin 方法执行登入，检查 token 是否正确
             try {
@@ -36,7 +37,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
             }
         }
         //如果请求头不存在 Token，则可能是执行登陆操作或者是游客状态访问，无需检查 token，直接返回 true
-        return true;
+        return false;
     }
 
     /**
@@ -57,7 +58,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     protected boolean executeLogin(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         String token = httpServletRequest.getHeader("Authorization");
-        JWTToken jwtToken = new JWTToken(token);
+        JwtToken jwtToken = new JwtToken(token);
         // 提交给realm进行登入，如果错误他会抛出异常并被捕获
         getSubject(request, response).login(jwtToken);
         // 如果没有抛出异常则代表登入成功，返回true

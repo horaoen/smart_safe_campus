@@ -10,11 +10,9 @@ logging:
     com.horaoen.smart_safe_campus.dao: debug
 
 mybatis:
-  configuration:
-    map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath:mapper/*Dao.xml
   type-aliases-package: com.horaoen.smart_safe_campus.model
+  config-location: classpath:config/mybatis-config.xml
 
 springdoc:
   packages-to-scan: com.horaoen.smart_safe_campus.controller
@@ -22,4 +20,7 @@ springdoc:
 security:
   jwt:
     secret: "!Q464rwr(&*)6%$#^%&JNJ46da"
+    accessTokenExpireTime: PT2H
+    refreshTokenExpireTime: PT8H
+
 

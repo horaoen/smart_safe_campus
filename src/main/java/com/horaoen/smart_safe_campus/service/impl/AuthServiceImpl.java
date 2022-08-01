@@ -1,6 +1,9 @@
 package com.horaoen.smart_safe_campus.service.impl;
 
 import com.horaoen.smart_safe_campus.common.api.CommonResult;
+import com.horaoen.smart_safe_campus.core.security.JwtToken;
+import com.horaoen.smart_safe_campus.core.security.JwtUtil;
+import com.horaoen.smart_safe_campus.dao.UserDao;
 import com.horaoen.smart_safe_campus.mbg.model.User;
 import com.horaoen.smart_safe_campus.model.dto.LoginDto;
 import com.horaoen.smart_safe_campus.service.AuthService;
@@ -20,6 +23,8 @@ import java.util.Random;
 public class AuthServiceImpl implements AuthService {
     @Autowired
     private RedisService redisService;
+    @Autowired
+    private UserDao userDao;
     @Value("${spring.redis.key.prefix.authCode}")
     private String REDIS_KEY_PREFIX_AUTH_CODE;
     @Value("${spring.redis.key.expire.authCode}")
@@ -61,11 +66,14 @@ public class AuthServiceImpl implements AuthService {
         Subject currentUser = SecurityUtils.getSubject();
 
         if(!currentUser.isAuthenticated()) {
-            UsernamePasswordToken token = new UsernamePasswordToken(loginUser.getUserName(), loginUser.getPassword());
+            User user = userDao.findUserByUsername(loginUser.getUserName());
+            if (user == null) {
+                return CommonResult.failed("用户不存在");
+            }
             try {
-                currentUser.login(token);
-                currentUser.getSession().setAttribute(token.getUsername(), currentUser.getPrincipal());
-                return CommonResult.success(null, "登录成功");
+                String jwtToken = JwtUtil.sign(loginUser.getUserName(), loginUser.getPassword());
+                SecurityUtils.getSubject().login(new JwtToken(jwtToken));
+                return CommonResult.success(jwtToken, "登录成功");
             } catch (UnknownAccountException e) {
                 return CommonResult.failed("账号不存在");
             } catch (Exception e) {

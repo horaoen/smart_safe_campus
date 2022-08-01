@@ -37,8 +37,6 @@
             organ_id, organ_name
         FROM
             tbl_organization
-        WHERE
-            organ_type = 0
         ORDER BY
             order_field
     </select>

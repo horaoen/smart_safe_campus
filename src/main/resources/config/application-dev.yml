@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/smart_safe_campus
-    username: postgres
-    password: 123456
+    url: jdbc:postgresql://horaoen-az-pg.postgres.database.azure.com:5432/smart_safe_campus
+    username: horaoen
+    password: timelimit@0624
   redis:
     host: 127.0.0.1
     port: 6379

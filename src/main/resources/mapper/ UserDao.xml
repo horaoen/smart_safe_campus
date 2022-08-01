@@ -18,5 +18,11 @@
         WHERE
             id = (SELECT role_id FROM tbl_user WHERE id = #{userId})
     </select>
+    <select id="getAllUsers" resultType="com.horaoen.smart_safe_campus.mbg.model.User">
+        SELECT
+            *
+        FROM
+            tbl_user
+    </select>
 </mapper>
 
