@@ -37,7 +37,7 @@ public class JwtFilter extends BasicHttpAuthenticationFilter {
             }
         }
         //如果请求头不存在 Token，则可能是执行登陆操作或者是游客状态访问，无需检查 token，直接返回 true
-        return false;
+        return true;
     }
 
     /**

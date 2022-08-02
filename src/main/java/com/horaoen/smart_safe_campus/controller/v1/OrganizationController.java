@@ -23,7 +23,6 @@ public class OrganizationController {
     private OrganizationService organizationService;
 
     @GetMapping
-    @RequiresAuthentication
     @Operation(description = "获取组织架构地区")
     public List<SimpleOrganVo> getAllRegion() {
         System.out.println("test");
