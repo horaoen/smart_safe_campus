@@ -31,7 +31,7 @@ public class SecurityService {
             SimplePrincipalCollection principalCollection = new SimplePrincipalCollection();
 
             Role role = userDao.getRoleByUserId(user.getId());
-            principalCollection.add(role.getRoleName(), realmName);
+            principalCollection.add(role.getRolename(), realmName);
 
             RoleDetailVoWithPermissionsVo roleDetail = roleDao.getRoleDetailWithPermissionsByRoleId(role.getId());
             principalCollection.addAll(roleDetail.getPermissions(), realmName);

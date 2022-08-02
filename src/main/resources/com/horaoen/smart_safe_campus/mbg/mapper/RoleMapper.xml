@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.horaoen.smart_safe_campus.mbg.model.Role">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="roleName" jdbcType="VARCHAR" property="rolename" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, description, role_name
+    id, description, roleName
   </sql>
   <select id="selectByExample" parameterType="com.horaoen.smart_safe_campus.mbg.model.RoleExample" resultMap="BaseResultMap">
     select
@@ -101,9 +101,9 @@
     <selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into tbl_role (id, description, role_name
+    insert into tbl_role (id, description, roleName
       )
-    values (#{id,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}
+    values (#{id,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.horaoen.smart_safe_campus.mbg.model.Role">
@@ -116,8 +116,8 @@
       <if test="description != null">
         description,
       </if>
-      <if test="roleName != null">
-        role_name,
+      <if test="rolename != null">
+        roleName,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -125,8 +125,8 @@
       <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="roleName != null">
-        #{roleName,jdbcType=VARCHAR},
+      <if test="rolename != null">
+        #{rolename,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -145,8 +145,8 @@
       <if test="row.description != null">
         description = #{row.description,jdbcType=VARCHAR},
       </if>
-      <if test="row.roleName != null">
-        role_name = #{row.roleName,jdbcType=VARCHAR},
+      <if test="row.rolename != null">
+        roleName = #{row.rolename,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="example != null">
@@ -157,7 +157,7 @@
     update tbl_role
     set id = #{row.id,jdbcType=BIGINT},
       description = #{row.description,jdbcType=VARCHAR},
-      role_name = #{row.roleName,jdbcType=VARCHAR}
+      roleName = #{row.rolename,jdbcType=VARCHAR}
     <if test="example != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -168,8 +168,8 @@
       <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="roleName != null">
-        role_name = #{roleName,jdbcType=VARCHAR},
+      <if test="rolename != null">
+        roleName = #{rolename,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -177,7 +177,7 @@
   <update id="updateByPrimaryKey" parameterType="com.horaoen.smart_safe_campus.mbg.model.Role">
     update tbl_role
     set description = #{description,jdbcType=VARCHAR},
-      role_name = #{roleName,jdbcType=VARCHAR}
+      roleName = #{rolename,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -3,26 +3,26 @@ package com.horaoen.smart_safe_campus.mbg.model;
 import java.io.Serializable;
 
 public class Organization implements Serializable {
-    private Object organId;
+    private Integer id;
 
     private String organName;
 
     private String parentId;
 
+    private Object organId;
+
     private Integer organType;
 
     private Long orderField;
 
-    private Integer id;
-
     private static final long serialVersionUID = 1L;
 
-    public Object getOrganId() {
-        return organId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setOrganId(Object organId) {
-        this.organId = organId;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getOrganName() {
@@ -41,6 +41,14 @@ public class Organization implements Serializable {
         this.parentId = parentId;
     }
 
+    public Object getOrganId() {
+        return organId;
+    }
+
+    public void setOrganId(Object organId) {
+        this.organId = organId;
+    }
+
     public Integer getOrganType() {
         return organType;
     }
@@ -57,26 +65,18 @@ public class Organization implements Serializable {
         this.orderField = orderField;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", organId=").append(organId);
+        sb.append(", id=").append(id);
         sb.append(", organName=").append(organName);
         sb.append(", parentId=").append(parentId);
+        sb.append(", organId=").append(organId);
         sb.append(", organType=").append(organType);
         sb.append(", orderField=").append(orderField);
-        sb.append(", id=").append(id);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

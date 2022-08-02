@@ -104,63 +104,63 @@ public class OrganizationExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andOrganIdIsNull() {
-            addCriterion("organ_id is null");
+        public Criteria andIdIsNull() {
+            addCriterion("id is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdIsNotNull() {
-            addCriterion("organ_id is not null");
+        public Criteria andIdIsNotNull() {
+            addCriterion("id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdEqualTo(Object value) {
-            addCriterion("organ_id =", value, "organId");
+        public Criteria andIdEqualTo(Integer value) {
+            addCriterion("id =", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdNotEqualTo(Object value) {
-            addCriterion("organ_id <>", value, "organId");
+        public Criteria andIdNotEqualTo(Integer value) {
+            addCriterion("id <>", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdGreaterThan(Object value) {
-            addCriterion("organ_id >", value, "organId");
+        public Criteria andIdGreaterThan(Integer value) {
+            addCriterion("id >", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdGreaterThanOrEqualTo(Object value) {
-            addCriterion("organ_id >=", value, "organId");
+        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("id >=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdLessThan(Object value) {
-            addCriterion("organ_id <", value, "organId");
+        public Criteria andIdLessThan(Integer value) {
+            addCriterion("id <", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdLessThanOrEqualTo(Object value) {
-            addCriterion("organ_id <=", value, "organId");
+        public Criteria andIdLessThanOrEqualTo(Integer value) {
+            addCriterion("id <=", value, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdIn(List<Object> values) {
-            addCriterion("organ_id in", values, "organId");
+        public Criteria andIdIn(List<Integer> values) {
+            addCriterion("id in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdNotIn(List<Object> values) {
-            addCriterion("organ_id not in", values, "organId");
+        public Criteria andIdNotIn(List<Integer> values) {
+            addCriterion("id not in", values, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdBetween(Object value1, Object value2) {
-            addCriterion("organ_id between", value1, value2, "organId");
+        public Criteria andIdBetween(Integer value1, Integer value2) {
+            addCriterion("id between", value1, value2, "id");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdNotBetween(Object value1, Object value2) {
-            addCriterion("organ_id not between", value1, value2, "organId");
+        public Criteria andIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
 
@@ -304,6 +304,66 @@ public class OrganizationExample {
             return (Criteria) this;
         }
 
+        public Criteria andOrganIdIsNull() {
+            addCriterion("organ_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdIsNotNull() {
+            addCriterion("organ_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdEqualTo(Object value) {
+            addCriterion("organ_id =", value, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdNotEqualTo(Object value) {
+            addCriterion("organ_id <>", value, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdGreaterThan(Object value) {
+            addCriterion("organ_id >", value, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdGreaterThanOrEqualTo(Object value) {
+            addCriterion("organ_id >=", value, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdLessThan(Object value) {
+            addCriterion("organ_id <", value, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdLessThanOrEqualTo(Object value) {
+            addCriterion("organ_id <=", value, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdIn(List<Object> values) {
+            addCriterion("organ_id in", values, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdNotIn(List<Object> values) {
+            addCriterion("organ_id not in", values, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdBetween(Object value1, Object value2) {
+            addCriterion("organ_id between", value1, value2, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdNotBetween(Object value1, Object value2) {
+            addCriterion("organ_id not between", value1, value2, "organId");
+            return (Criteria) this;
+        }
+
         public Criteria andOrganTypeIsNull() {
             addCriterion("organ_type is null");
             return (Criteria) this;
@@ -421,66 +481,6 @@ public class OrganizationExample {
 
         public Criteria andOrderFieldNotBetween(Long value1, Long value2) {
             addCriterion("order_field not between", value1, value2, "orderField");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIsNull() {
-            addCriterion("id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIsNotNull() {
-            addCriterion("id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdEqualTo(Integer value) {
-            addCriterion("id =", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotEqualTo(Integer value) {
-            addCriterion("id <>", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThan(Integer value) {
-            addCriterion("id >", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("id >=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThan(Integer value) {
-            addCriterion("id <", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdLessThanOrEqualTo(Integer value) {
-            addCriterion("id <=", value, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdIn(List<Integer> values) {
-            addCriterion("id in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotIn(List<Integer> values) {
-            addCriterion("id not in", values, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdBetween(Integer value1, Integer value2) {
-            addCriterion("id between", value1, value2, "id");
-            return (Criteria) this;
-        }
-
-        public Criteria andIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("id not between", value1, value2, "id");
             return (Criteria) this;
         }
     }
