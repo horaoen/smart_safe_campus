@@ -1,5 +1,6 @@
 package com.horaoen.smart_safe_campus.controller.v1;
 
+import com.horaoen.smart_safe_campus.common.api.CommonResult;
 import com.horaoen.smart_safe_campus.model.vo.OrganizationVo;
 import com.horaoen.smart_safe_campus.model.dto.OrganizationForCreateDto;
 import com.horaoen.smart_safe_campus.model.vo.SimpleOrganVo;
@@ -24,9 +25,8 @@ public class OrganizationController {
 
     @GetMapping
     @Operation(description = "获取组织架构地区")
-    public List<SimpleOrganVo> getAllRegion() {
-        System.out.println("test");
-        return organizationService.getAllRegion();
+    public CommonResult getAllRegion() {
+        return CommonResult.success(organizationService.getAllRegion());
     }
 
     @GetMapping("/{organId}")

@@ -9,7 +9,7 @@ public class Organization implements Serializable {
 
     private String parentId;
 
-    private Object organId;
+    private String organId;
 
     private Integer organType;
 
@@ -41,11 +41,11 @@ public class Organization implements Serializable {
         this.parentId = parentId;
     }
 
-    public Object getOrganId() {
+    public String getOrganId() {
         return organId;
     }
 
-    public void setOrganId(Object organId) {
+    public void setOrganId(String organId) {
         this.organId = organId;
     }
 

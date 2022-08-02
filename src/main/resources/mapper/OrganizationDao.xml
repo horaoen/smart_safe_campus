@@ -34,11 +34,9 @@
 
     <select id="getAllRegion" resultType="SimpleOrganVo">
         SELECT
-            organ_id, organ_name
+            organ_id, organ_name, parent_id, organ_type, order_field
         FROM
             tbl_organization
-        ORDER BY
-            order_field
     </select>
 
     <select id="getOrganById" resultMap="organization">

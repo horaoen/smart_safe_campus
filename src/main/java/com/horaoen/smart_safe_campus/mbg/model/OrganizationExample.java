@@ -314,52 +314,62 @@ public class OrganizationExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdEqualTo(Object value) {
+        public Criteria andOrganIdEqualTo(String value) {
             addCriterion("organ_id =", value, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdNotEqualTo(Object value) {
+        public Criteria andOrganIdNotEqualTo(String value) {
             addCriterion("organ_id <>", value, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdGreaterThan(Object value) {
+        public Criteria andOrganIdGreaterThan(String value) {
             addCriterion("organ_id >", value, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdGreaterThanOrEqualTo(Object value) {
+        public Criteria andOrganIdGreaterThanOrEqualTo(String value) {
             addCriterion("organ_id >=", value, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdLessThan(Object value) {
+        public Criteria andOrganIdLessThan(String value) {
             addCriterion("organ_id <", value, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdLessThanOrEqualTo(Object value) {
+        public Criteria andOrganIdLessThanOrEqualTo(String value) {
             addCriterion("organ_id <=", value, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdIn(List<Object> values) {
+        public Criteria andOrganIdLike(String value) {
+            addCriterion("organ_id like", value, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdNotLike(String value) {
+            addCriterion("organ_id not like", value, "organId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOrganIdIn(List<String> values) {
             addCriterion("organ_id in", values, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdNotIn(List<Object> values) {
+        public Criteria andOrganIdNotIn(List<String> values) {
             addCriterion("organ_id not in", values, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdBetween(Object value1, Object value2) {
+        public Criteria andOrganIdBetween(String value1, String value2) {
             addCriterion("organ_id between", value1, value2, "organId");
             return (Criteria) this;
         }
 
-        public Criteria andOrganIdNotBetween(Object value1, Object value2) {
+        public Criteria andOrganIdNotBetween(String value1, String value2) {
             addCriterion("organ_id not between", value1, value2, "organId");
             return (Criteria) this;
         }
