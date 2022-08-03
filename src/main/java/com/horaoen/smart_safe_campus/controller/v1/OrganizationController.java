@@ -44,15 +44,15 @@ public class OrganizationController {
 
     @PostMapping("/{parentId}")
     @Operation(description = "添加组织")
-    public void addOrgan(@PathVariable UUID parentId, @RequestBody OrganizationForCreateDto organization) {
-        organization.setId(UUID.randomUUID());
+    public void addOrgan(@PathVariable String parentId, @RequestBody OrganizationForCreateDto organization) {
+        organization.setId(UUID.randomUUID().toString());
         organization.setParentId(parentId);
         organizationService.addOrganization(organization);
     }
 
     @PutMapping("/{organId}")
     @Operation(description = "更新组织信息")
-    public void updateOrgan(@PathVariable UUID organId, @RequestBody OrganizationForCreateDto organization) {
+    public void updateOrgan(@PathVariable String organId, @RequestBody OrganizationForCreateDto organization) {
         organization.setId(organId);
         organizationService.updateOrganization(organization);
     }

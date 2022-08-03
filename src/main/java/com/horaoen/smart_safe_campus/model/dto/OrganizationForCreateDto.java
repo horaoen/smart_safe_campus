@@ -13,7 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class OrganizationForCreateDto {
     @Schema(description = "组织Id", hidden = true)
-    private UUID id;
+    private String id;
 
     @Schema(description = "组织名称")
     private String organName;
@@ -25,6 +25,6 @@ public class OrganizationForCreateDto {
     private int orderField;
 
     @Schema(description = "上级部门Id", hidden = true)
-    private UUID parentId;
+    private String parentId;
 
 }

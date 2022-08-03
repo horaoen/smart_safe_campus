@@ -1,10 +1,9 @@
 package com.horaoen.smart_safe_campus.service.impl;
 
-import com.horaoen.smart_safe_campus.common.api.CommonResult;
 import com.horaoen.smart_safe_campus.dao.OrganizationDao;
+import com.horaoen.smart_safe_campus.model.dto.OrganizationForCreateDto;
 import com.horaoen.smart_safe_campus.model.vo.OrganNodeVo;
 import com.horaoen.smart_safe_campus.model.vo.OrganizationVo;
-import com.horaoen.smart_safe_campus.model.dto.OrganizationForCreateDto;
 import com.horaoen.smart_safe_campus.model.vo.SimpleOrganVo;
 import com.horaoen.smart_safe_campus.service.OrganizationService;
 import org.springframework.beans.BeanUtils;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import java.util.stream.DoubleStream;
+
 
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
