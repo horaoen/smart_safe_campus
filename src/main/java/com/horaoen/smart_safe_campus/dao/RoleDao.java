@@ -15,6 +15,6 @@ public interface RoleDao {
     List<RoleDetailVo> getAll();
     RoleDetailVoWithPermissionsVo getRoleDetailWithPermissionsByRoleId(long roleId);
     void deleteRoleDetailByRoleId(long roleId);
-    long addRoleDetail(RoleForCreateDto roleForCreateDto);
+    void addRoleDetail(RoleForCreateDto roleForCreateDto);
     void updateRoleDetail(long roleId, RoleForCreateDto roleForCreateDto);
 }

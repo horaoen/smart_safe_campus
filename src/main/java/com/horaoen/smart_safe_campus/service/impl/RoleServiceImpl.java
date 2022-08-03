@@ -28,8 +28,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void addRoleDetailWithPermissions(RoleForCreateDto roleForCreateDto) {
-        long id = roleDao.addRoleDetail(roleForCreateDto);
-        permissionDao.addPermissions(id, roleForCreateDto.getPermissions());
+        roleDao.addRoleDetail(roleForCreateDto);
+        permissionDao.addPermissions(roleForCreateDto.getId(), roleForCreateDto.getPermissions());
     }
 
     @Override
@@ -48,8 +48,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public long addRoleDetail(RoleForCreateDto roleForCreateDto) {
-        return roleDao.addRoleDetail(roleForCreateDto);
+    public void addRoleDetail(RoleForCreateDto roleForCreateDto) {
+        roleDao.addRoleDetail(roleForCreateDto);
     }
 
     @Override
