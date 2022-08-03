@@ -28,8 +28,8 @@ public class OrganizationController {
 
     @GetMapping("/{organId}")
     @Operation(description = "通过organId获取部门及子部门")
-    public OrganizationVo getOrganById(@PathVariable String organId) {
-        return organizationService.getOrganById(organId);
+    public CommonResult getOrganById(@PathVariable String organId) {
+        return CommonResult.success(organizationService.getOrganById(organId));
     }
 
     @DeleteMapping()
@@ -42,17 +42,19 @@ public class OrganizationController {
 
     @PostMapping("/{parentId}")
     @Operation(description = "添加组织")
-    public void addOrgan(@PathVariable String parentId, @RequestBody OrganizationForCreateDto organization) {
+    public CommonResult addOrgan(@PathVariable String parentId, @RequestBody OrganizationForCreateDto organization) {
         organization.setId(UUID.randomUUID().toString());
         organization.setParentId(parentId);
         organizationService.addOrganization(organization);
+        return CommonResult.success(null);
     }
 
     @PutMapping("/{organId}")
     @Operation(description = "更新组织信息")
-    public void updateOrgan(@PathVariable String organId, @RequestBody OrganizationForCreateDto organization) {
+    public CommonResult updateOrgan(@PathVariable String organId, @RequestBody OrganizationForCreateDto organization) {
         organization.setId(organId);
         organizationService.updateOrganization(organization);
+        return CommonResult.success(null);
     }
 
 }
