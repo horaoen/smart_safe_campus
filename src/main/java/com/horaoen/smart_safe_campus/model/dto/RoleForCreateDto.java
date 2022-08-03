@@ -1,5 +1,6 @@
 package com.horaoen.smart_safe_campus.model.dto;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.AllArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoleForCreateDto {
-    @Ignore
+    @Hidden
     private int id;
     @Schema(description = "角色名称")
     private String roleName;

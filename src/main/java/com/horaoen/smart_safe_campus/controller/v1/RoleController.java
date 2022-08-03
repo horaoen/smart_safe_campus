@@ -1,5 +1,6 @@
 package com.horaoen.smart_safe_campus.controller.v1;
 
+import com.horaoen.smart_safe_campus.common.api.CommonResult;
 import com.horaoen.smart_safe_campus.model.vo.RoleDetailVo;
 import com.horaoen.smart_safe_campus.model.vo.RoleDetailVoWithPermissionsVo;
 import com.horaoen.smart_safe_campus.model.dto.RoleForCreateDto;
@@ -23,32 +24,35 @@ public class RoleController {
 
     @GetMapping
     @Operation(description = "获取角色信息列表")
-    public List<RoleDetailVo> getAllRole() {
-        return roleService.getAll();
+    public CommonResult getAllRole() {
+        return CommonResult.success(roleService.getAll());
     }
 
     @GetMapping("/{roleId}")
     @Operation(description = "通过id获取角色详细信息")
-    public RoleDetailVoWithPermissionsVo getRoleDetailWithPermissionByRoleId(@PathVariable long roleId) {
+    public CommonResult getRoleDetailWithPermissionByRoleId(@PathVariable long roleId) {
         RoleDetailVoWithPermissionsVo detail = roleService.getRoleDetailWithPermissionsByRoleId(roleId);
-        return detail;
+        return CommonResult.success(detail);
     }
 
     @DeleteMapping("/{roleId}")
     @Operation(description = "通过id删除角色详细信息")
-    public void deleteRoleDetailWithPermissionByRoleId(@PathVariable long roleId) {
+    public CommonResult deleteRoleDetailWithPermissionByRoleId(@PathVariable long roleId) {
         roleService.deleteRoleDetailWithPermissionByRoleId(roleId);
+        return CommonResult.success(null);
     }
 
     @PostMapping
     @Operation(description = "添加角色信息")
-    public void addRoleDetailWithPermissions(@RequestBody RoleForCreateDto roleForCreateDto) {
+    public CommonResult addRoleDetailWithPermissions(@RequestBody RoleForCreateDto roleForCreateDto) {
         roleService.addRoleDetailWithPermissions(roleForCreateDto);
+        return CommonResult.success(null);
     }
 
     @PutMapping("/{roleId}")
     @Operation(description = "修改角色信息")
-    public void updateRoleDetail(@RequestBody RoleForCreateDto roleForCreateDto, @PathVariable long roleId) {
+    public CommonResult updateRoleDetail(@RequestBody RoleForCreateDto roleForCreateDto, @PathVariable long roleId) {
         roleService.updateRoleDetail(roleId, roleForCreateDto);
+        return CommonResult.success(null);
     }
 }
