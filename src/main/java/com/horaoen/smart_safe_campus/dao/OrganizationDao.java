@@ -17,7 +17,7 @@ public interface OrganizationDao {
     List<SimpleOrganVo> getAllRegion();
     OrganizationVo getOrganById(String organId);
     List<SimpleOrganVo> getOrgansByParentId(UUID parentId);
-    void deleteByIds(List<UUID> ids);
+    void deleteByIds(List<String> ids);
     void addOrganization(OrganizationForCreateDto organization);
     void updateOrganization(OrganizationForCreateDto organization);
 }

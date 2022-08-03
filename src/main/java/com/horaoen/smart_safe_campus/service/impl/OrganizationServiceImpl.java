@@ -10,9 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -23,14 +21,29 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public void deepDeleteOrgans(List<String> ids) {
-//        List<SimpleOrganVo> organList = organizationDao.getAllRegion();
-//        List<String> toDeleteOrgans = new ArrayList<>(ids);
-//        for (:
-//             ) {
-//
-//        }
+        List<SimpleOrganVo> organList = organizationDao.getAllRegion();
+        Set<String> toDeleteIds = new HashSet<>(ids);
+        Set<SimpleOrganVo> organs = organList.stream()
+                .filter(organItem -> ids.contains(organItem.getOrganId()))
+                .collect(Collectors.toSet());
+        for (SimpleOrganVo organ: organs) {
+            toDeleteIds.addAll(getAllSubOrgansId(organ, organList));
+        }
+        organizationDao.deleteByIds(new ArrayList<>(toDeleteIds));
     }
 
+
+    private Set<String> getAllSubOrgansId(SimpleOrganVo organ, List<SimpleOrganVo> organList) {
+        Set<String> ids = new HashSet<>();
+        ids.add(organ.getOrganId());
+        organList.stream()
+                .filter(organItem -> organ.getOrganId().equals(organItem.getParentId()) && organItem.getOrganType() != 1)
+                .map(organItem ->
+                    ids.addAll(getAllSubOrgansId(organItem, organList))
+                )
+                .collect(Collectors.toList());
+        return ids;
+    }
     @Override
     public List<OrganNodeVo> getAllRegion() {
         List<SimpleOrganVo> organList = organizationDao.getAllRegion();
@@ -44,7 +57,7 @@ public class OrganizationServiceImpl implements OrganizationService {
         OrganNodeVo organNode = new OrganNodeVo();
         BeanUtils.copyProperties(organ, organNode);
         List<OrganNodeVo> children = organList.stream()
-                .filter(organItem -> organItem.getParentId().equals(organ.getOrganId()) && organItem.getOrganType() != 1)
+                .filter(organItem -> organ.getOrganId().equals(organItem.getParentId()) && organItem.getOrganType() != 1)
                 .map(organItem -> convertToOrganNodeVo(organItem, organList)).collect(Collectors.toList());
         organNode.setChildren(children);
         return organNode;
@@ -61,7 +74,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void deleteByIds(List<UUID> ids) {
+    public void deleteByIds(List<String> ids) {
         organizationDao.deleteByIds(ids);
     }
 

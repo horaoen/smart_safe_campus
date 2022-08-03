@@ -1,16 +1,13 @@
 package com.horaoen.smart_safe_campus.controller.v1;
 
 import com.horaoen.smart_safe_campus.common.api.CommonResult;
-import com.horaoen.smart_safe_campus.model.vo.OrganizationVo;
 import com.horaoen.smart_safe_campus.model.dto.OrganizationForCreateDto;
-import com.horaoen.smart_safe_campus.model.vo.SimpleOrganVo;
+import com.horaoen.smart_safe_campus.model.vo.OrganizationVo;
 import com.horaoen.smart_safe_campus.service.OrganizationService;
 import com.horaoen.smart_safe_campus.util.StringUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,7 +33,7 @@ public class OrganizationController {
     }
 
     @DeleteMapping()
-    @Operation(description = "通过organId删除部门")
+    @Operation(description = "通过organId批量删除部门")
     public CommonResult deleteOrgans(@RequestParam String organIds) {
         List<String> uuids = StringUtil.StringToList(organIds);
         organizationService.deepDeleteOrgans(uuids);
