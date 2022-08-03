@@ -15,7 +15,7 @@ import java.util.UUID;
 @Mapper
 public interface OrganizationDao {
     List<SimpleOrganVo> getAllRegion();
-    OrganizationVo getOrganById(UUID organId);
+    OrganizationVo getOrganById(String organId);
     List<SimpleOrganVo> getOrgansByParentId(UUID parentId);
     void deleteByIds(List<UUID> ids);
     void addOrganization(OrganizationForCreateDto organization);

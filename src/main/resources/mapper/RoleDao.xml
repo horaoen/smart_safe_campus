@@ -41,6 +41,8 @@
         SET
             description = #{roleForCreateDto.description},
             role_name = #{roleForCreateDto.roleName}
+        WHERE
+            id = #{roleId}
     </update>
 
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -21,7 +22,13 @@ public class OrganizationServiceImpl implements OrganizationService {
     private OrganizationDao organizationDao;
 
     @Override
-    public void deepDeleteOrgans(List<UUID> ids) {
+    public void deepDeleteOrgans(List<String> ids) {
+//        List<SimpleOrganVo> organList = organizationDao.getAllRegion();
+//        List<String> toDeleteOrgans = new ArrayList<>(ids);
+//        for (:
+//             ) {
+//
+//        }
     }
 
     @Override
@@ -44,7 +51,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public OrganizationVo getOrganById(UUID organId) {
+    public OrganizationVo getOrganById(String organId) {
         return organizationDao.getOrganById(organId);
     }
 

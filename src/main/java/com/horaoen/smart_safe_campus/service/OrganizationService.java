@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.UUID;
 
 public interface OrganizationService {
-    void deepDeleteOrgans(List<UUID> ids);
+    void deepDeleteOrgans(List<String> ids);
     List<OrganNodeVo> getAllRegion();
-    OrganizationVo getOrganById(UUID organId);
+    OrganizationVo getOrganById(String organId);
     List<SimpleOrganVo> getOrgansByParentId(UUID parentId);
     void deleteByIds(List<UUID> ids);
     void addOrganization(OrganizationForCreateDto organization);

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.horaoen.smart_safe_campus.dao.OrganizationDao">
     <resultMap id="organization" type="OrganizationVo">
+        <id property="organId" column="organ_id" />
         <collection property="subOrgans"
                     ofType="SimpleOrganVo"
                     select="getOrgansByParentId"
@@ -43,8 +44,9 @@
         SELECT
             organ_id,
             organ_name,
+            parent_id,
             organ_type,
-            order_field,
+            order_field
         FROM
             tbl_organization
         WHERE
@@ -53,7 +55,7 @@
 
     <select id="getOrgansByParentId" resultType="SimpleOrganVo">
         SELECT
-            organ_id, organ_name
+            organ_id, organ_name, organ_type, parent_id, order_field
         FROM
             tbl_organization
         WHERE

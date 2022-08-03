@@ -19,7 +19,7 @@ public class OrganizationForCreateDto {
     private String organName;
 
     @Schema(description = "组织类型")
-    private OrganizationType organType;
+    private int organType;
 
     @Schema(description = "排序值")
     private int orderField;

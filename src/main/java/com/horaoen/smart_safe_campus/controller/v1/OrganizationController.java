@@ -24,22 +24,23 @@ public class OrganizationController {
     private OrganizationService organizationService;
 
     @GetMapping
-    @Operation(description = "获取组织架构地区")
+    @Operation(description = "获取组织架构")
     public CommonResult getAllRegion() {
         return CommonResult.success(organizationService.getAllRegion());
     }
 
     @GetMapping("/{organId}")
     @Operation(description = "通过organId获取部门及子部门")
-    public OrganizationVo getOrganById(@PathVariable UUID organId) {
+    public OrganizationVo getOrganById(@PathVariable String organId) {
         return organizationService.getOrganById(organId);
     }
 
-    @DeleteMapping("/{organIds}")
+    @DeleteMapping()
     @Operation(description = "通过organId删除部门")
-    public void deleteOrgans(@PathVariable String organIds) {
-        List<UUID> uuids = StringUtil.StringToUUIDs(organIds);
+    public CommonResult deleteOrgans(@RequestParam String organIds) {
+        List<String> uuids = StringUtil.StringToList(organIds);
         organizationService.deepDeleteOrgans(uuids);
+        return CommonResult.success(null);
     }
 
     @PostMapping("/{parentId}")
