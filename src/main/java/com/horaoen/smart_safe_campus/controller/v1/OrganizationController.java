@@ -36,6 +36,7 @@ public class OrganizationController {
     @Operation(description = "创建一级部门")
     public CommonResult addTopOrgan(@RequestBody OrganizationForCreateDto organization) {
         organization.setId(UUID.randomUUID().toString());
+        organization.setOrganType(1);
         organizationService.addOrganization(organization);
         return CommonResult.success(organization);
     }
