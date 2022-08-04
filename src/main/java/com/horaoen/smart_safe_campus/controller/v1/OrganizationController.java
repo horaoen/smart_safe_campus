@@ -2,6 +2,7 @@ package com.horaoen.smart_safe_campus.controller.v1;
 
 import com.horaoen.smart_safe_campus.common.api.CommonResult;
 import com.horaoen.smart_safe_campus.model.dto.OrganizationForCreateDto;
+import com.horaoen.smart_safe_campus.model.dto.TopOrganForCreateDto;
 import com.horaoen.smart_safe_campus.model.vo.OrganizationVo;
 import com.horaoen.smart_safe_campus.service.OrganizationService;
 import com.horaoen.smart_safe_campus.util.StringUtil;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,10 +36,13 @@ public class OrganizationController {
 
     @PostMapping
     @Operation(description = "创建一级部门")
-    public CommonResult addTopOrgan(@RequestBody OrganizationForCreateDto organization) {
-        organization.setId(UUID.randomUUID().toString());
-        organization.setOrganType(1);
-        organizationService.addOrganization(organization);
+    public CommonResult addTopOrgan(@Valid @RequestBody TopOrganForCreateDto organization) {
+        OrganizationForCreateDto organ = new OrganizationForCreateDto();
+        organ.setId(UUID.randomUUID().toString());
+        organ.setOrganType(1);
+        organ.setOrganName(organization.getOrganName());
+        organ.setOrderField(organization.getOrderField());
+        organizationService.addOrganization(organ);
         return CommonResult.success(organization);
     }
 
