@@ -32,6 +32,14 @@ public class OrganizationController {
         return CommonResult.success(organizationService.getOrganById(organId));
     }
 
+    @PostMapping
+    @Operation(description = "创建一级部门")
+    public CommonResult addTopOrgan(@RequestBody OrganizationForCreateDto organization) {
+        organization.setId(UUID.randomUUID().toString());
+        organizationService.addOrganization(organization);
+        return CommonResult.success(organization);
+    }
+
     @DeleteMapping()
     @Operation(description = "通过organId批量删除部门")
     public CommonResult deleteOrgans(@RequestParam String organIds) {
