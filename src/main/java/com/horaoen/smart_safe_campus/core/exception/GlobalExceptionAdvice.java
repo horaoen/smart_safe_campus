@@ -1,5 +1,6 @@
 package com.horaoen.smart_safe_campus.core.exception;
 
+import com.horaoen.smart_safe_campus.common.api.CommonResult;
 import com.horaoen.smart_safe_campus.core.UnifyResponse;
 import com.horaoen.smart_safe_campus.core.exception.http.HttpException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class GlobalExceptionAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public UnifyResponse handleBeanValidation(HttpServletRequest request, MethodArgumentNotValidException e) {
+    public CommonResult handleBeanValidation(HttpServletRequest request, MethodArgumentNotValidException e) {
         String method = request.getMethod();
         String requestUrl = request.getRequestURI();
         System.out.println(e);
@@ -64,18 +65,18 @@ public class GlobalExceptionAdvice {
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         String errorMessages = this.formatAllErrorMessages(allErrors);
 
-        return new UnifyResponse(10001, errorMessages, method + " " + requestUrl);
+        return CommonResult.validateFailed(errorMessages);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public UnifyResponse handleConstraintException(HttpServletRequest request, ConstraintViolationException e) {
+    public CommonResult handleConstraintException(HttpServletRequest request, ConstraintViolationException e) {
         String method = request.getMethod();
         String requestUrl = request.getRequestURI();
         System.out.println(e);
         String message = e.getMessage();
-        return new UnifyResponse(10001, message, message + " " + requestUrl);
+        return CommonResult.validateFailed(message);
     }
 
     private String formatAllErrorMessages(List<ObjectError> allErrors) {
