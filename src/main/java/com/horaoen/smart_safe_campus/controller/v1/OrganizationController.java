@@ -36,6 +36,12 @@ public class OrganizationController {
     @Operation(description = "通过organId批量删除部门")
     public CommonResult deleteOrgans(@RequestParam String organIds) {
         List<String> uuids = StringUtil.StringToList(organIds);
+        for (String id: uuids) {
+            OrganizationVo organ = organizationService.getOrganById(id);
+            if(organ == null) {
+                return CommonResult.validateFailed("部门不存在, 请检查Id正确性");
+            }
+        }
         organizationService.deepDeleteOrgans(uuids);
         return CommonResult.success(null);
     }
