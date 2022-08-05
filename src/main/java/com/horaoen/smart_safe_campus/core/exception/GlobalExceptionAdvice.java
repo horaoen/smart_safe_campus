@@ -10,13 +10,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
+import javax.validation.UnexpectedTypeException;
 import java.util.List;
 
 /**
@@ -79,9 +77,22 @@ public class GlobalExceptionAdvice {
         return CommonResult.validateFailed(message);
     }
 
+    @ExceptionHandler(UnexpectedTypeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public CommonResult handleUnexpectedTypeException(HttpServletRequest request, UnexpectedTypeException e) {
+        String method = request.getMethod();
+        String requestUrl = request.getRequestURI();
+        System.out.println(e);
+        String message = e.getMessage();
+        return CommonResult.validateFailed(message);
+    }
+
     private String formatAllErrorMessages(List<ObjectError> allErrors) {
         StringBuffer errorMsg = new StringBuffer();
         allErrors.forEach(error -> errorMsg.append(error.getDefaultMessage()).append(';'));
         return errorMsg.toString();
     }
+
+
 }

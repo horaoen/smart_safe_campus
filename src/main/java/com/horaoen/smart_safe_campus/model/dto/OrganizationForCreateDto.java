@@ -22,7 +22,6 @@ public class OrganizationForCreateDto {
     private String organName;
 
     @Schema(description = "组织类型")
-    @NotEmpty(message = "组织类型不能为空")
     @Range(min = 1, max = 4, message = "组织类型号必须在1-4之间")
     private int organType;
 
@@ -30,7 +29,6 @@ public class OrganizationForCreateDto {
     private int orderField = 1;
 
     @Schema(description = "上级部门Id", hidden = true)
-    @NotEmpty(message = "上级部门Id不能为空")
     private String parentId;
 
 }

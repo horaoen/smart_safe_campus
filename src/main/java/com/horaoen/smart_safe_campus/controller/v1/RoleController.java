@@ -25,7 +25,6 @@ public class RoleController {
 
     @GetMapping
     @Operation(description = "获取角色信息列表")
-    @Validated
     public CommonResult getAllRole() {
         return CommonResult.success(roleService.getAll());
     }

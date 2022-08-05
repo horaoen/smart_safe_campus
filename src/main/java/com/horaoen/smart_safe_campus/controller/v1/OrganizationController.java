@@ -62,7 +62,9 @@ public class OrganizationController {
 
     @PostMapping("/{parentId}")
     @Operation(description = "添加组织")
-    public CommonResult addOrgan(@PathVariable String parentId, @RequestBody OrganizationForCreateDto organization) {
+    public CommonResult addOrgan(
+            @PathVariable String parentId,
+            @Valid @RequestBody OrganizationForCreateDto organization) {
         organization.setId(UUID.randomUUID().toString());
         organization.setParentId(parentId);
         organizationService.addOrganization(organization);
@@ -71,7 +73,9 @@ public class OrganizationController {
 
     @PutMapping("/{organId}")
     @Operation(description = "更新组织信息")
-    public CommonResult updateOrgan(@PathVariable String organId, @RequestBody OrganizationForCreateDto organization) {
+    public CommonResult updateOrgan(
+            @PathVariable String organId,
+            @Valid @RequestBody OrganizationForCreateDto organization) {
         organization.setId(organId);
         organizationService.updateOrganization(organization);
         return CommonResult.success(null);
