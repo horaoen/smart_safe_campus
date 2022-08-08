@@ -1,6 +1,7 @@
 package com.horaoen.smart_safe_campus.model.dto;
 
 import com.horaoen.smart_safe_campus.model.OrganizationType;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -30,5 +32,7 @@ public class OrganizationForCreateDto {
 
     @Schema(description = "上级部门Id", hidden = true)
     private String parentId;
+
+
 
 }

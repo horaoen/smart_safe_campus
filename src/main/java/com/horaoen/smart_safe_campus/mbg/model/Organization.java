@@ -3,7 +3,7 @@ package com.horaoen.smart_safe_campus.mbg.model;
 import java.io.Serializable;
 
 public class Organization implements Serializable {
-    private Integer id;
+    private Long id;
 
     private String organName;
 
@@ -17,11 +17,11 @@ public class Organization implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
-    private Long id;
+    private String id;
 
     private String username;
 
@@ -14,7 +14,7 @@ public class User implements Serializable {
 
     private Long roleId;
 
-    private Long organId;
+    private String organId;
 
     private Long createUserId;
 
@@ -26,11 +26,11 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -66,11 +66,11 @@ public class User implements Serializable {
         this.roleId = roleId;
     }
 
-    public Long getOrganId() {
+    public String getOrganId() {
         return organId;
     }
 
-    public void setOrganId(Long organId) {
+    public void setOrganId(String organId) {
         this.organId = organId;
     }
 

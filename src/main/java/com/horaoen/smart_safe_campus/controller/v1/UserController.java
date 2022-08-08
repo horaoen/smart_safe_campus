@@ -11,6 +11,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/v1/user")
 @Tag(name = "UserController", description = "用户管理")
@@ -29,15 +31,24 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     @Operation(description = "删除用户信息")
-    public CommonResult deleteUser(@PathVariable long userId) {
+    public CommonResult deleteUser(@PathVariable String userId) {
         userService.deleteUser(userId);
         return CommonResult.success(null);
     }
 
     @PostMapping()
     @Operation(description = "新增用户")
-    public CommonResult createUser(@RequestBody UserForCreationDto user) {
+    public CommonResult createUser(@Valid @RequestBody UserForCreationDto user) {
+        if(!user.getPassword().equals(user.getConfirmedPassword()))
+            return CommonResult.failed("两次密码不一致");
         userService.createUser(user);
+        return CommonResult.success(null);
+    }
+
+    @PutMapping("/{userId}")
+    @Operation(description = "更新用户信息")
+    public CommonResult updateUser(@PathVariable String userId, @Valid @RequestBody UserForCreationDto user) {
+        userService.updateUser(userId, user);
         return CommonResult.success(null);
     }
 }

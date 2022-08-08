@@ -10,9 +10,11 @@ import java.util.List;
 @Mapper
 public interface UserDao {
     User findUserByUsername(String username);
-    Role getRoleByUserId(Long userId);
+    Role getRoleByUserId(String userId);
     List<User> getAllUsers();
-    void deleteUser(long userId);
+    void deleteUser(String userId);
 
     void createUser(UserForCreationDto user);
+
+    void updateUser(UserForCreationDto user);
 }

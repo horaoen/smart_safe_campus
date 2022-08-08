@@ -3,9 +3,21 @@
 <mapper namespace="com.horaoen.smart_safe_campus.dao.UserDao">
     <insert id="createUser">
         insert into
-            user(username, password, email, phone, role)
-        values(#{username}, #{password}, #{email}, #{phone}, #{role})
+            tbl_user(id, username, realname, phone_number, role_id, create_time, organ_id, password)
+        values(#{id}, #{username}, #{realname}, #{phoneNumber}, #{roleId}, #{createTime}, #{organId}, #{password})
     </insert>
+    <update id="updateUser">
+        update tbl_user
+        set
+            username = #{username},
+            realname = #{realname},
+            phone_number = #{phoneNumber},
+            role_id = #{roleId},
+            organ_id = #{organId},
+            password = #{password}
+        where id = #{id}
+    </update>
+
     <delete id="deleteUser">
         delete from tbl_user where id = #{id}
     </delete>

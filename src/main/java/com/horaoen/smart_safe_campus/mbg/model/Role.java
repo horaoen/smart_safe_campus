@@ -7,7 +7,7 @@ public class Role implements Serializable {
 
     private String description;
 
-    private String rolename;
+    private String roleName;
 
     private static final long serialVersionUID = 1L;
 
@@ -27,12 +27,12 @@ public class Role implements Serializable {
         this.description = description;
     }
 
-    public String getRolename() {
-        return rolename;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setRolename(String rolename) {
-        this.rolename = rolename;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class Role implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", description=").append(description);
-        sb.append(", rolename=").append(rolename);
+        sb.append(", roleName=").append(roleName);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
