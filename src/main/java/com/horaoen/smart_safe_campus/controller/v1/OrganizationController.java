@@ -9,6 +9,7 @@ import com.horaoen.smart_safe_campus.util.StringUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -48,6 +49,7 @@ public class OrganizationController {
 
     @DeleteMapping()
     @Operation(description = "通过organId批量删除部门")
+    @Transactional
     public CommonResult deleteOrgans(@RequestParam String organIds) {
         List<String> uuids = StringUtil.StringToList(organIds);
         for (String id: uuids) {

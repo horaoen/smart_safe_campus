@@ -1,7 +1,12 @@
 package com.horaoen.smart_safe_campus;
 
+import com.horaoen.smart_safe_campus.dao.PermissionDao;
+import com.horaoen.smart_safe_campus.dao.RoleDao;
+import com.horaoen.smart_safe_campus.mbg.model.Permission;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,6 +15,10 @@ import java.util.Map;
 
 @SpringBootTest
 class SmartSafeCampusApplicationTests {
+    @Autowired
+    private PermissionDao permissionDao;
+    @Autowired
+    private RoleDao roleDao;
     @Test
     public void testHashMap() {
         List<Map<String, Integer>> listedMap = new ArrayList<>();
@@ -34,5 +43,12 @@ class SmartSafeCampusApplicationTests {
                 System.out.println("key: " + entry.getKey() + " value: " + entry.getValue());
             }
         }
+    }
+
+    @Test
+    @Transactional
+    public void testTransaction() {
+        roleDao.deleteRoleDetailByRoleId(89);
+        permissionDao.deleteByRoleId(100);
     }
 }

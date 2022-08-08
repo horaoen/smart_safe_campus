@@ -8,6 +8,7 @@ import com.horaoen.smart_safe_campus.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,6 +39,7 @@ public class RoleController {
 
     @DeleteMapping("/{roleId}")
     @Operation(description = "通过id删除角色详细信息")
+    @Transactional
     public CommonResult deleteRoleDetailWithPermissionByRoleId(@PathVariable long roleId) {
         roleService.deleteRoleDetailWithPermissionByRoleId(roleId);
         return CommonResult.success(null);
@@ -45,6 +47,7 @@ public class RoleController {
 
     @PostMapping
     @Operation(description = "添加角色信息")
+    @Transactional
     public CommonResult addRoleDetailWithPermissions(
             @Valid @RequestBody RoleForCreateDto roleForCreateDto) {
         roleService.addRoleDetailWithPermissions(roleForCreateDto);
@@ -53,8 +56,8 @@ public class RoleController {
 
     @PutMapping("/{roleId}")
     @Operation(description = "修改角色信息")
-    @Validated
-    public CommonResult updateRoleDetail(@RequestBody RoleForCreateDto roleForCreateDto, @PathVariable long roleId) {
+    @Transactional
+    public CommonResult updateRoleDetail(@Valid @RequestBody RoleForCreateDto roleForCreateDto, @PathVariable long roleId) {
         roleService.updateRoleDetail(roleId, roleForCreateDto);
         return CommonResult.success(null);
     }
