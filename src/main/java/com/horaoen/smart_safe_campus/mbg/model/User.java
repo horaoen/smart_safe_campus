@@ -1,5 +1,7 @@
 package com.horaoen.smart_safe_campus.mbg.model;
 
+import io.swagger.v3.oas.annotations.Hidden;
+
 import java.io.Serializable;
 import java.util.Date;
 
